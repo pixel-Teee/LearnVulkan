@@ -1,0 +1,6 @@
+[submodule "VK/ThirdParty/glfw"]
+	path = VK/ThirdParty/glfw
+	url = https://github.com/pixel-Teee/glfw.git
+[submodule "VK/ThirdParty/glm"]
+	path = VK/ThirdParty/glm
+	url = https://github.com/pixel-Teee/glm.git
