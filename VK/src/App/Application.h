@@ -26,8 +26,11 @@ namespace Pixel {
 	class Application {
 	public:
 		void Run();
-
+		
+		void RecordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 	private:
+		void DrawFrame();
+
 		void InitWindow();
 
 		void InitVulkan();
@@ -38,7 +41,12 @@ namespace Pixel {
 		void CreateLogicalDevice();
 		void CreateSurface();
 		void CreateImageViews();
+		void CreateRenderPass();
 		void CreateGraphicsPipeline();
+		void CreateFramebuffers();
+		void CreateCommandPool();
+		void CreateCommandBuffer();
+		void CreateSyncObjects();
 		VkShaderModule CreateShaderModule(const std::vector<char>& code);
 		//------aux------
 		QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
@@ -86,6 +94,26 @@ namespace Pixel {
 		//------Swap Chain Information------
 
 		std::vector<VkImageView> SwapChainImageViews;
+
+		std::vector<VkFramebuffer> swapChainFramebuffers;
+
+		//Render Pass
+		VkRenderPass renderPass;
+
+		//Pipline Layout
+		VkPipelineLayout pipelineLayout;
+
+		//Pipeline
+		VkPipeline graphicsPipeline;
+
+		//Command 
+		VkCommandPool commandPool;
+		VkCommandBuffer commandBuffer;
+
+		//synchronization objects
+		VkSemaphore imageAvailableSemaphore;
+		VkSemaphore renderFinishedSemaphore;
+		VkFence	inFlightFence;
 	};
 }
 
