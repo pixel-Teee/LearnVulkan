@@ -28,12 +28,17 @@ namespace Pixel {
 		void Run();
 		
 		void RecordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
+
+		bool framebufferResized = false;
 	private:
 		void DrawFrame();
 
 		void InitWindow();
 
 		void InitVulkan();
+
+		void CleanUpSwapChain();
+		void RecreateSwapChain();
 
 		//------Init Vulkan Objects------
 		void SetupDebugMessenger();
@@ -45,7 +50,8 @@ namespace Pixel {
 		void CreateGraphicsPipeline();
 		void CreateFramebuffers();
 		void CreateCommandPool();
-		void CreateCommandBuffer();
+		void CreateVertexBuffer();
+		void CreateCommandBuffers();
 		void CreateSyncObjects();
 		VkShaderModule CreateShaderModule(const std::vector<char>& code);
 		//------aux------
@@ -58,6 +64,7 @@ namespace Pixel {
 		VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 		VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 		VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+		uint32_t FindMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 		//------swap chain information------
 		//------aux------
 		//------Init Vulkan Objects------
@@ -108,12 +115,17 @@ namespace Pixel {
 
 		//Command 
 		VkCommandPool commandPool;
-		VkCommandBuffer commandBuffer;
+		std::vector<VkCommandBuffer> commandBuffers;
 
 		//synchronization objects
-		VkSemaphore imageAvailableSemaphore;
-		VkSemaphore renderFinishedSemaphore;
-		VkFence	inFlightFence;
+		std::vector<VkSemaphore> imageAvailableSemaphores;
+		std::vector<VkSemaphore> renderFinishedSemaphores;
+		std::vector<VkFence>	inFlightFences;
+
+		uint32_t currentFrame = 0;
+
+		VkBuffer vertexBuffer;
+		VkDeviceMemory vertexBufferMemory;
 	};
 }
 
