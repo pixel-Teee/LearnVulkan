@@ -32,6 +32,7 @@ namespace Pixel {
 		bool framebufferResized = false;
 	private:
 		void DrawFrame();
+		void UpdateUniformBuffer(uint32_t currentImage);
 
 		void InitWindow();
 
@@ -47,6 +48,7 @@ namespace Pixel {
 		void CreateSurface();
 		void CreateImageViews();
 		void CreateRenderPass();
+		void CreateDescriptorSetLayout();
 		void CreateGraphicsPipeline();
 		void CreateFramebuffers();
 		void CreateCommandPool();
@@ -54,6 +56,9 @@ namespace Pixel {
 		VkBuffer& buffer, VkDeviceMemory& bufferMemory);
 		void CreateVertexBuffer();
 		void CreateIndexBuffer();
+		void CreateUniformBuffers();
+		void CreateDescriptorPool();
+		void CreateDescriptorSets();
 		void CreateCommandBuffers();
 		void CreateSyncObjects();
 		VkShaderModule CreateShaderModule(const std::vector<char>& code);
@@ -111,6 +116,7 @@ namespace Pixel {
 		//Render Pass
 		VkRenderPass renderPass;
 
+		VkDescriptorSetLayout descriptorSetLayout;
 		//Pipline Layout
 		VkPipelineLayout pipelineLayout;
 
@@ -132,6 +138,12 @@ namespace Pixel {
 		VkDeviceMemory vertexBufferMemory;
 		VkBuffer indexBuffer;
 		VkDeviceMemory indexBufferMemory;
+
+		std::vector<VkBuffer> uniformBuffers;
+		std::vector<VkDeviceMemory> uniformBuffersMemory;
+
+		VkDescriptorPool descriptorPool;
+		std::vector<VkDescriptorSet> descriptorSets;
 	};
 }
 
