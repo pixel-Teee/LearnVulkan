@@ -1751,13 +1751,13 @@ namespace Pixel {
 		createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 		createInfo.pApplicationInfo = &appInfo;
 
-		uint32_t glfwExtensionCount = 0;
-		const char** glfwExtensions;
+		//uint32_t glfwExtensionCount = 0;
+		//const char** glfwExtensions;
 
-		glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+		//glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
-		createInfo.enabledExtensionCount = glfwExtensionCount;
-		createInfo.ppEnabledExtensionNames = glfwExtensions;
+		//createInfo.enabledExtensionCount = glfwExtensionCount;
+		//createInfo.ppEnabledExtensionNames = glfwExtensions;
 
 		//------enable validation layer------
 		VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
